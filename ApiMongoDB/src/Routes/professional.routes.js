@@ -6,5 +6,7 @@ const router = Router();
 
 router.get("/professional", professionalCtrl.getProfessional)
 router.post("/professional", professionalCtrl.postProfessional)
+router.put("/professional", professionalCtrl.putProfessional)
+router.delete("/professional", professionalCtrl.delProfessional)
 
 module.exports = router;
