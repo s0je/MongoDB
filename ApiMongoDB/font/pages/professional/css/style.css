@@ -55,9 +55,9 @@
     position: relative;
   }
   
-  .card h2 {
+  .card h4 {
     color: rgba(0, 0, 0, 0.3);
-    font-size: 60px;
+    font-size: 40px;
     text-transform: uppercase;
   }
   
@@ -158,4 +158,35 @@
     .card .row input[type="submit"] {
       width: 100%;
     }
+  }
+
+  .boton {
+    border: 5px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    height: 100%;
+    width: 200px;
+    cursor: pointer;
+    outline: none;
+    background: transparent;
+    text-transform: uppercase;
+    color: black;
+    line-height: 40px;
+    font-size: 24px;
+    font-weight: 700;
+    border-radius: 45px;
+    transition: all 0.4s;
+    margin: 25px;
+  }
+
+  .boton:hover{
+    border: 5px solid black;
+    color: black;
+    transition: all 0.4s;
+  }
+
+  .botonera{
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }

@@ -25,9 +25,25 @@
             </li>
             </ul>
     </nav>
-    <div class="bodyPost">
+    <div class="botonera">
+      <button class="boton" style="font-weight: bold;" onclick="mostrarProfesional()" type="button">Mostrar</button>
+      <button class="boton" style="font-weight: bold;" onclick="postForm()" type="button">Crear</button>
+      <button class="boton" style="font-weight: bold;" onclick="updateForm()" type="button">Actualizar</button>
+      <button class="boton" style="font-weight: bold;" onclick="delForm()" type="button">Eliminar</button>
+    </div>
+    <div id="buscador" style="width: 100%; display: flex; justify-content: center; visibility: hidden;">
+      <div style="width: 40%; height: 50%; display: flex; flex-direction: row; align-content: center; align-items: center;">
+        <input id="indice" type="text" style="height: 50px;" class="form-control" placeholder="Introduzca id del profesional">
+        <button type="reset" class="boton" onclick="mostrarId()">Buscar</button>
+    </div>
+    </div>
+    <div class="row" id="profesional">
+            
+		</div>
+    <div id="bodyPost" style="visibility: hidden; display: none;">
+    <div  class="bodyPost">
         <div class="card">
-            <h2>Añadir profesional</h2>
+            <h4>Añadir profesional</h4>
             <div class="row">
               <div class="col">
                 <div class="form-group">
@@ -102,7 +118,7 @@
               <div class="col">
                 <div class="form-group">
                   <label>Numero de oscars</label>
-                  <input id="oscarNumber" type="text">
+                  <input id="oscarsNumber" type="text">
                 </div>
               </div>
 
@@ -114,10 +130,132 @@
               </div>
 
               <div class="col">
-                <input type="reset" value="Enviar">
+                <button class="boton" style="font-weight: bold;" onclick="postProfesional()" type="button">Enviar</button>
               </div>
             </div>
           </div>
+    </div>
+    </div>
+    <div id="bodyUpdate" style="visibility: hidden; display: none;">
+      <div  class="bodyPost">
+          <div class="card">
+              <h4>Actualizar profesional</h4>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Id</label>
+                    <input id="idUpdate" type="text">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label>Imagen</label>
+                    <input id="imageUp" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Nombre</label>
+                    <input id="nameUp" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Edad</label>
+                    <input id="ageUp" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Genero</label>
+                    <input id="genreUp" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Peso</label>
+                    <input id="weightUp" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Altura</label>
+                    <input id="heightUp" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Color de pelo</label>
+                    <input id="hairColorUp" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Raza</label>
+                    <input id="raceUp" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Esta retirado/a</label>
+                    <input id="isRetiredUp" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Nacionalidad</label>
+                    <input id="nationalityUp" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Numero de oscars</label>
+                    <input id="oscarsNumberUp" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Profesion</label>
+                    <input id="profesionUp" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <button class="boton" style="font-weight: bold;" onclick="putProfesional()" type="button">Enviar</button>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+    <div id="bodyDelete" style="visibility: hidden; display: none;">
+      <div  class="bodyPost">
+          <div class="card">
+              <h4>Eliminar profesional</h4>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Id</label>
+                    <input id="idDel" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <button class="boton" style="font-weight: bold;" onclick="delProfesional()" type="button">Enviar</button>
+                </div>
+              </div>
+            </div>
+      </div>
     </div>
     <div class="container-fluid text-left p-3" style="background-color: #c9d5d4">
         <p class="small">&copy; Todos los derechos reservados</p>
