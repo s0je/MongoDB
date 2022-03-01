@@ -1,34 +1,52 @@
-class Professional{
+class Movie{
 
-    constructor( image, name, age, genre, weight, height, hairColor, race, isRetired, nationality, oscarsNumber, profesion)
+    constructor( portada,title,releaseYear,actors,nationality, director, writer,language, platform,isMCU, mainCharacterName,producer, distributor, genre)
     {   
-        this.image = image;
-        this.name = name;
-        this.age = age;
-        this.genre = genre;
-        this.weight = weight;
-        this.height = height;
-        this.hairColor = hairColor;
-        this.race = race;
-        this.isRetired = isRetired;
-        this.nationality = nationality;
-        this.oscarsNumber = oscarsNumber;
-        this.profesion = profesion;
+        this.portada = portada;
+        this.title= title;
+        this.releaseYear= releaseYear;
+        this.actors = [actors];
+        this.nationality= nationality;
+        this.director= [director];
+        this.writer= [writer];
+        this.language= language;
+        this.platform= platform;
+        this.isMCU = isMCU;
+        this.mainCharacterName= mainCharacterName;
+        this.producer= [producer];
+        this.distributor= distributor;
+        this.genre= genre;
     }
   
   }
 
-  async function mostrarProfesional()
+  async function mostrarMovie()
 {
-    let buscador = document.getElementById("buscador");
-    buscador.style.cssText = 'width: 100%; display: flex; justify-content: center; visibility: visible;';
+    let ocultar = document.getElementById("ocultar");
+    ocultar.style.cssText = 'width: 100%; display: block; visibility: visible;';
     let postForm = document.getElementById('bodyPost');
     postForm.style.cssText = 'visibility: hidden; display: none;';
     let delform = document.getElementById("bodyDelete")
     delform.style.cssText = 'visibility: hidden; display: none;';  
     let updateform = document.getElementById("bodyUpdate")
     updateform.style.cssText = 'visibility: hidden; display: none;';
-    let url = 'http://localhost:3000/professional'
+    let post = document.getElementById("postActor")
+    post.style.cssText = 'visibility: hidden; display: none;';
+    let postD = document.getElementById("postDirector")
+    postD.style.cssText = 'visibility: hidden; display: none;';
+    let postW = document.getElementById("postWriter")
+    postW.style.cssText = 'visibility: hidden; display: none;';
+    let add = document.getElementById('postAdd');
+    add.style.cssText = 'visibility: hidden; display: none;';
+    let delActor = document.getElementById("delActor")
+    delActor.style.cssText = 'visibility: hidden; display: none;';
+    let delD = document.getElementById("delDirector")
+    delD.style.cssText = 'visibility: hidden; display: none;';
+    let delW = document.getElementById("delWriter")
+    delW.style.cssText = 'visibility: hidden; display: none;';
+    let delB = document.getElementById('delButtom');
+    delB.style.cssText = 'visibility: hidden; display: none;'; 
+    let url = 'http://localhost:3000/movie'
     let param = {
         headers:{
           "content-type": "application/json; charset=UTF-8"
@@ -40,33 +58,34 @@ class Professional{
         let data = await fetch(url,param)
         let resul = await data.json()
         let textTemp='';
-        console.log(resul);
-        for(let prof of resul)
+        for(let peliculas of resul)
           {
             textTemp +=`<div class="col">
-                          <div class="card" style="width: 420px; margin: 15px;">
-                              <img src="`+prof.image+`" style="border-radius: 15px;" class="card-img-top" alt="...">
+                          <div class="card"  style="width: 420px; margin: 5px; padding: 15px">
+                              <img src="`+peliculas.portada+`" style="border-radius: 15px;" class="card-img-top" alt="...">
                               <div class="card-body">
                                   <div class="card-header">
-                                  `+prof.name+`
+                                  `+peliculas.title+`
                                   </div>
                                   <ul class="list-group list-group-flush">
-                                      <li class="list-group-item">Genre: `+prof.genre+`</li>
-                                      <li class="list-group-item">Age: `+prof.age+`</li>
-                                      <li class="list-group-item">Weigth: `+prof.weight+`</li>
-                                      <li class="list-group-item">Height: `+prof.height+`</li>
-                                      <li class="list-group-item">Hair color: `+prof.hairColor+`</li>
-                                      <li class="list-group-item">Race: `+prof.race+`</li>
-                                      <li class="list-group-item">Is retired?: `+prof.isRetired+`</li>
-                                      <li class="list-group-item">Nationality: `+prof.nationality+`</li>
-                                      <li class="list-group-item">Oscar's: `+prof.oscarsNumber+`</li>
-                                      <li class="list-group-item">Profesion: `+prof.profesion+`</li>
+                                      <li class="list-group-item">Año de lanzamiento: `+peliculas.releaseYear+`</li>
+                                      <li class="list-group-item">Actores: `+peliculas.actors+`</li>
+                                      <li class="list-group-item">País: `+peliculas.nationality+`</li>
+                                      <li class="list-group-item">Diector: `+peliculas.director+`</li>
+                                      <li class="list-group-item">Guionista: `+peliculas.writer+`</li>
+                                      <li class="list-group-item">Idioma: `+peliculas.language+`</li>
+                                      <li class="list-group-item">Plataforma: `+peliculas.platform+`</li>
+                                      <li class="list-group-item">Universo Marvel: `+peliculas.isMCU+`</li>
+                                      <li class="list-group-item">Protagonista: `+peliculas.mainCharacterName+`</li>
+                                      <li class="list-group-item">Productor: `+peliculas.producer+`</li>
+                                      <li class="list-group-item">Distribuidora: `+peliculas.distributor+`</li>
+                                      <li class="list-group-item">Género: `+peliculas.actors+`</li>
                                   </ul>
                               </div>
                           </div>
-                        </div>`;
+                      </div>`;
           }
-          document.getElementById("profesional").innerHTML = textTemp;
+          document.getElementById("movie").innerHTML = textTemp;
         }
         
     catch(err) 
@@ -76,17 +95,17 @@ class Professional{
 }
 async function mostrarId()
 {
-  document.getElementById("profesional").innerHTML = '';
+  document.getElementById("movie").innerHTML = '';
   let id = document.getElementById("indice").value;
   let url='';
   
   if(id != '')
   {
-    url = `http://localhost:3000/professional?id=${id}`;
+    url = `http://localhost:3000/movie?id=${id}`;
   }
   else
   {
-    url = `http://localhost:3000/professional`;
+    url = `http://localhost:3000/movie`;
   }
     let param = {
         headers:{"content-type": "application/json; charset=UTF-8"},
@@ -98,34 +117,35 @@ async function mostrarId()
         let textTemp='';
         if(id != '')
         {
-        console.log(resul);
             textTemp +=`<div class="col">
-                          <div class="card" style="width: 420px; margin: 15px;">
-                              <img src="`+resul.image+`" style="border-radius: 15px;" class="card-img-top" alt="...">
+                          <div class="card"  style="width: 420px; margin: 5px; padding: 15px">
+                              <img src="`+resul.portada+`" style="border-radius: 15px;" class="card-img-top" alt="...">
                               <div class="card-body">
                                   <div class="card-header">
-                                  `+resul.name+`
+                                  `+resul.title+`
                                   </div>
                                   <ul class="list-group list-group-flush">
-                                      <li class="list-group-item">Genre: `+resul.genre+`</li>
-                                      <li class="list-group-item">Age: `+resul.age+`</li>
-                                      <li class="list-group-item">Weigth: `+resul.weight+`</li>
-                                      <li class="list-group-item">Height: `+resul.height+`</li>
-                                      <li class="list-group-item">Hair color: `+resul.hairColor+`</li>
-                                      <li class="list-group-item">Race: `+resul.race+`</li>
-                                      <li class="list-group-item">Is retides?: `+resul.isRetired+`</li>
-                                      <li class="list-group-item">Nationality: `+resul.nationality+`</li>
-                                      <li class="list-group-item">Oscar's: `+resul.oscarsNumber+`</li>
-                                      <li class="list-group-item">Profesion: `+resul.profesion+`</li>
+                                      <li class="list-group-item">Año de lanzamiento: `+resul.releaseYear+`</li>
+                                      <li class="list-group-item">Actores: `+resul.actors+`</li>
+                                      <li class="list-group-item">País: `+resul.nationality+`</li>
+                                      <li class="list-group-item">Diector: `+resul.director+`</li>
+                                      <li class="list-group-item">Guionista: `+resul.writer+`</li>
+                                      <li class="list-group-item">Idioma: `+resul.language+`</li>
+                                      <li class="list-group-item">Plataforma: `+resul.platform+`</li>
+                                      <li class="list-group-item">Universo Marvel: `+resul.isMCU+`</li>
+                                      <li class="list-group-item">Protagonista: `+resul.mainCharacterName+`</li>
+                                      <li class="list-group-item">Productor: `+resul.producer+`</li>
+                                      <li class="list-group-item">Distribuidora: `+resul.distributor+`</li>
+                                      <li class="list-group-item">Género: `+resul.actors+`</li>
                                   </ul>
                               </div>
                           </div>
-                        </div>`;
-          document.getElementById("profesional").innerHTML = textTemp;
+                      </div>`;
+          document.getElementById("movie").innerHTML = textTemp;
 
         }else {
 
-          mostrarProfesional()
+          mostrarMovie()
 
         }
         
@@ -135,29 +155,30 @@ async function mostrarId()
         }
 }
 
-async function postProfesional()
+async function postMovie()
 {
   try
   {
-    let nuevoProfesional = new Professional(
-                                          document.getElementById("image").value,
-                                          document.getElementById("name").value,
-                                          document.getElementById("age").value,
-                                          document.getElementById("genre").value,
-                                          document.getElementById("weight").value,
-                                          document.getElementById("height").value,
-                                          document.getElementById("hairColor").value,
-                                          document.getElementById("race").value,
-                                          document.getElementById("isRetired").value,
+    let nuevomovie = new Movie(
+                                          document.getElementById("portada").value,
+                                          document.getElementById("title").value,
+                                          document.getElementById("releaseYear").value,
+                                          document.getElementById("actors").value,
                                           document.getElementById("nationality").value,
-                                          document.getElementById("oscarsNumber").value,
-                                          document.getElementById("profesion").value);
-    let url = "http://localhost:3000/professional";
-    console.log(nuevoProfesional)
+                                          document.getElementById("director").value,
+                                          document.getElementById("writer").value,
+                                          document.getElementById("language").value,
+                                          document.getElementById("platform").value,
+                                          document.getElementById("isMCU").value,
+                                          document.getElementById("mainCharacterName").value,
+                                          document.getElementById("producer").value,
+                                          document.getElementById("dirtributor").value,
+                                          document.getElementById("actors").value);
+    let url = "http://localhost:3000/movie";
     let param =
       {
         headers:{"content-type": "application/json; charset=UTF-8"},
-        body: JSON.stringify(nuevoProfesional),
+        body: JSON.stringify(nuevomovie),
         method: "POST"
       }
 
@@ -172,27 +193,29 @@ async function postProfesional()
   
 }
 
-//PUT Profesional
-async function putProfesional()
+//PUT movie
+async function putMovie()
 {
   try
   {
     let id = document.getElementById("idUpdate").value;
-    let image =document.getElementById("imageUp").value;
-    let name = document.getElementById("nameUp").value;
-    let age = document.getElementById("ageUp").value;
-    let genre = document.getElementById("genreUp").value;
-    let weight = document.getElementById("weightUp").value;
-    let height = document.getElementById("heightUp").value;
-    let hairColor = document.getElementById("hairColorUp").value;
-    let race = document.getElementById("raceUp").value;
-    let isRetired = document.getElementById("isRetiredUp").value;
+    let portada =document.getElementById("portadaUp").value;
+    let title = document.getElementById("titleUp").value;
+    let releaseYear = document.getElementById("releaseYearUp").value;
+    let actors = document.getElementById("actorsUp").value;
     let nationality = document.getElementById("nationalityUp").value;
-    let oscarsNumber = document.getElementById("oscarsNumberUp").value;
-    let profesion = document.getElementById("profesionUp").value;
+    let director = document.getElementById("directorUp").value;
+    let writer = document.getElementById("writerUp").value;
+    let language = document.getElementById("languageUp").value;
+    let platform = document.getElementById("platformUp").value;
+    let isMCU = document.getElementById("isMCUUp").value;
+    let mainCharacterName = document.getElementById("mainCharacterNameUp").value;
+    let producer = document.getElementById("producerUp").value;
+    let distributor = document.getElementById("distributorUp").value;
+    let genre = document.getElementById("genreUp").value;
                                    
-    let datos = {'image': image,'name':name,'age':age,'genre': genre, 'weight':weight, 'height': height, 'hairColor': hairColor, 'race':race,'isRetired':isRetired, 'nationality': nationality,'oscarsNumber':oscarsNumber,'profesion':profesion};
-    let url = `http://localhost:3000/professional?id=${id}`;
+    let datos = {'portada': portada,'title':title,'releaseYear':releaseYear,'actors': actors, 'nationality':nationality, 'director': director, 'writer': writer, 'language':language,'platform':platform, 'isMCU': isMCU,'mainCharacterName':mainCharacterName,'producer':producer,'distributor': distributor, 'genre': genre};
+    let url = `http://localhost:3000/movie?id=${id}`;
     let param =
       {
         headers:{"content-type": "application/json; charset=UTF-8"},
@@ -208,7 +231,9 @@ async function putProfesional()
   }
 }
 
-async function delProfesional()
+///Delete Movie
+
+async function delMovie()
 {
   try
   {
@@ -218,7 +243,7 @@ async function delProfesional()
   let dato = {'id': id};
   console.log(dato);
 
-  let url = "http://localhost:3000/professional";
+  let url = "http://localhost:3000/movie";
 
     let param =
       {
@@ -235,42 +260,557 @@ async function delProfesional()
   }
 }
 
+//Get adicionales
+
+async function mostrarActors()
+{
+  document.getElementById("movie").innerHTML = '';
+  let postForm = document.getElementById('bodyPost');
+  postForm.style.cssText = 'visibility: hidden; display: none;';
+  let delform = document.getElementById("bodyDelete")
+  delform.style.cssText = 'visibility: hidden; display: none;';  
+  let updateform = document.getElementById("bodyUpdate")
+  updateform.style.cssText = 'visibility: hidden; display: none;';
+  let id = document.getElementById("indice").value;
+  let url=`http://localhost:3000/movie/actors?id=${id}`;
+  
+  let param = {
+        headers:{"content-type": "application/json; charset=UTF-8"},
+        method:"GET"
+    }
+  try
+  {
+    let data = await fetch(url,param)
+    let resul = await data.json()
+    let textTemp='';
+    let actTemp='';
+    if(id!='')
+    {
+      for(let j of resul)
+      {
+        actTemp += `<div>`+j+`</div>`
+      }
+      textTemp +=`<div class="col">
+                          <div class="card"  style="width: 420px; margin: 5px; padding: 15px">
+                              <div class="card-body">
+                                  <div class="card-header">
+                                  Los Actores son:
+                                  </div>
+                                   `+actTemp+`
+                              </div>
+                          </div>
+                      </div>`;
+      
+    }
+    console.log(actTemp)
+    document.getElementById("movie").innerHTML = textTemp;
+    console.log(resul)
+    
+  }
+  catch(err) 
+        {
+          console.log(err);
+        }
+}
+
+async function mostrarDirector()
+{
+  document.getElementById("movie").innerHTML = '';
+  let postForm = document.getElementById('bodyPost');
+  postForm.style.cssText = 'visibility: hidden; display: none;';
+  let delform = document.getElementById("bodyDelete")
+  delform.style.cssText = 'visibility: hidden; display: none;';  
+  let updateform = document.getElementById("bodyUpdate")
+  updateform.style.cssText = 'visibility: hidden; display: none;';
+  let id = document.getElementById("indice").value;
+  let url=`http://localhost:3000/movie/directors?id=${id}`;
+  
+  let param = {
+        headers:{"content-type": "application/json; charset=UTF-8"},
+        method:"GET"
+    }
+  try
+  {
+    let data = await fetch(url,param)
+    let resul = await data.json()
+    let textTemp='';
+    let actTemp='';
+    if(id!='')
+    {
+      for(let j of resul)
+      {
+        actTemp += `<div>`+j+`</div>`
+      }
+      textTemp +=`<div class="col">
+                          <div class="card"  style="width: 420px; margin: 5px; padding: 15px">
+                              <div class="card-body">
+                                  <div class="card-header">
+                                  Los Directores son:
+                                  </div>
+                                   `+actTemp+`
+                              </div>
+                          </div>
+                      </div>`;
+      
+    }
+    console.log(actTemp)
+    document.getElementById("movie").innerHTML = textTemp;
+    console.log(resul)
+    
+  }
+  catch(err) 
+        {
+          console.log(err);
+        }
+}
+
+async function mostrarWriter()
+{
+  document.getElementById("movie").innerHTML = '';
+  let postForm = document.getElementById('bodyPost');
+  postForm.style.cssText = 'visibility: hidden; display: none;';
+  let delform = document.getElementById("bodyDelete")
+  delform.style.cssText = 'visibility: hidden; display: none;';  
+  let updateform = document.getElementById("bodyUpdate")
+  updateform.style.cssText = 'visibility: hidden; display: none;';
+  let id = document.getElementById("indice").value;
+  let url=`http://localhost:3000/movie/writer?id=${id}`;
+  
+  let param = {
+        headers:{"content-type": "application/json; charset=UTF-8"},
+        method:"GET"
+    }
+  try
+  {
+    let data = await fetch(url,param)
+    let resul = await data.json()
+    let textTemp='';
+    let actTemp='';
+    if(id!='')
+    {
+      for(let j of resul)
+      {
+        actTemp += `<div>`+j+`</div>`
+      }
+      textTemp +=`<div class="col">
+                          <div class="card"  style="width: 420px; margin: 5px; padding: 15px">
+                              <div class="card-body">
+                                  <div class="card-header">
+                                  Los Guionistas son:
+                                  </div>
+                                   `+actTemp+`
+                              </div>
+                          </div>
+                      </div>`;
+      
+    }
+    console.log(actTemp)
+    document.getElementById("movie").innerHTML = textTemp;
+    console.log(resul)
+    
+  }
+  catch(err) 
+        {
+          console.log(err);
+        }
+}
+
+//Post adicionales
+
+async function addActor()
+{
+  let id = document.getElementById("idPostActor").value;
+  let actors= document.getElementById("actorPost").value;
+  let dato = {'actors' : actors};
+
+  try
+  {
+    let url = `http://localhost:3000/movie/actors?id=${id}`;
+    let param =
+      {
+        headers:{"content-type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(dato),
+        method: "POST"
+      }
+    let data = await fetch(url,param);
+    let result = await data.json();
+    console.log(result);
+  }
+  catch(err)
+  {
+    console.log(err);
+  }
+}
+
+async function addDirector()
+{
+  let id = document.getElementById("idPostDirector").value
+  let director= document.getElementById("directorPost").value;
+  let dato = {'director': director};
+  try
+  {
+  let url = `http://localhost:3000/movie/director?id=${id}`;
+  let param =
+    {
+      headers:{"content-type": "application/json; charset=UTF-8"},
+      body: JSON.stringify(dato),
+      method: "POST"
+    }
+    let data = await fetch(url,param);
+    let result = await data.json();
+    console.log(result);
+  }
+  catch(err)
+  {
+    console.log(err);
+  }
+}
+
+async function addWriter()
+{
+  let id = document.getElementById("idPostWriter").value
+  let writer= document.getElementById("writerPost").value;
+  let dato = {'writer': writer};
+  try
+  {
+  let url = `http://localhost:3000/movie/writer?id=${id}`;
+  let param =
+    {
+      headers:{"content-type": "application/json; charset=UTF-8"},
+      body: JSON.stringify(dato),
+      method: "POST"
+    }
+    let data = await fetch(url,param);
+    let result = await data.json();
+    console.log(result);
+  }
+  catch(err)
+  {
+    console.log(err);
+  }
+}
+
+
+///Del adicionales
+
+async function delActor()
+{
+  try
+  {
+    
+  let id = document.getElementById("idDelActor").value;
+  let actors = document.getElementById("actorDel").value
+  let dato = {'actors': actors};
+  console.log(dato);
+
+  let url = `http://localhost:3000/movie/actors?id=${id}`;
+
+    let param =
+      {
+        headers:{"content-type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(dato),
+        method: "DELETE"
+      }
+    let data = await fetch(url,param);
+    let result = await data.json();
+    console.log(result);
+  }catch(err)
+  {
+    console.log(err);
+  }
+}
+
+async function delDirector()
+{
+  try
+  {
+    
+  let id = document.getElementById("idDelDirector").value;
+  let director = document.getElementById("directorDel").value
+  let dato = {'director': director};
+  console.log(dato);
+
+  let url = `http://localhost:3000/movie/actors?id=${id}`;
+
+    let param =
+      {
+        headers:{"content-type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(dato),
+        method: "DELETE"
+      }
+    let data = await fetch(url,param);
+    let result = await data.json();
+    console.log(result);
+  }catch(err)
+  {
+    console.log(err);
+  }
+}
+
+async function delWriter()
+{
+  try
+  {
+    
+  let id = document.getElementById("idDelWriter").value;
+  let writer = document.getElementById("writerDel").value
+  let dato = {'writer': writer};
+  console.log(dato);
+
+  let url = `http://localhost:3000/movie/actors?id=${id}`;
+
+    let param =
+      {
+        headers:{"content-type": "application/json; charset=UTF-8"},
+        body: JSON.stringify(dato),
+        method: "DELETE"
+      }
+    let data = await fetch(url,param);
+    let result = await data.json();
+    console.log(result);
+  }catch(err)
+  {
+    console.log(err);
+  }
+}
 
 function postForm()
 {
-  document.getElementById("profesional").innerHTML = '';
-  let buscador = document.getElementById("buscador");
-  buscador.style.cssText = 'visibility: hidden;';
+  document.getElementById("movie").innerHTML = '';
+  let ocultar = document.getElementById("ocultar");
+  ocultar.style.cssText = 'visibility: hidden; display: none;';
   let updateform = document.getElementById("bodyUpdate")
   updateform.style.cssText = 'visibility: hidden; display: none;';
   let delform = document.getElementById("bodyDelete")
-  delform.style.cssText = 'visibility: hidden; display: none;';  
+  delform.style.cssText = 'visibility: hidden; display: none;';
+  let postD = document.getElementById("postDirector")
+  postD.style.cssText = 'visibility: hidden; display: none;';
+  let postW = document.getElementById("postWriter")
+  postW.style.cssText = 'visibility: hidden; display: none;';
+  let delActor = document.getElementById("delActor")
+  delActor.style.cssText = 'visibility: hidden; display: none;';
+  let delD = document.getElementById("delDirector")
+  delD.style.cssText = 'visibility: hidden; display: none;';
+  let delW = document.getElementById("delWriter")
+  delW.style.cssText = 'visibility: hidden; display: none;';
+  let delB = document.getElementById('delButtom');
+  delB.style.cssText = 'visibility: hidden; display: none;'; 
+  let add = document.getElementById('postAdd');
+  add.style.cssText = 'visibility: visible; display: block;';  
   let postForm = document.getElementById('bodyPost');
   postForm.style.cssText = 'visibility: visible; display: block;';
 }
 
 function updateForm()
 {
-  document.getElementById("profesional").innerHTML = '';
-  let buscador = document.getElementById("buscador");
-  buscador.style.cssText = 'visibility: hidden;'; 
+  document.getElementById("movie").innerHTML = '';
+  let ocultar = document.getElementById("ocultar");
+  ocultar.style.cssText = 'visibility: hidden; display: none;'; 
   let postForm = document.getElementById('bodyPost');
   postForm.style.cssText = 'visibility: hidden; display: none;';
   let delform = document.getElementById("bodyDelete")
-  delform.style.cssText = 'visibility: hidden; display: none;';  
+  delform.style.cssText = 'visibility: hidden; display: none;';
+  let add = document.getElementById('postAdd');
+  add.style.cssText = 'visibility: hidden; display: none;';
+  let post = document.getElementById("postActor")
+  post.style.cssText = 'visibility: hidden; display: none;';
+  let postD = document.getElementById("postDirector")
+  postD.style.cssText = 'visibility: hidden; display: none;';
+  let postW = document.getElementById("postWriter")
+  postW.style.cssText = 'visibility: hidden; display: none;';
+  let delActor = document.getElementById("delActor")
+  delActor.style.cssText = 'visibility: hidden; display: none;';
+  let delD = document.getElementById("delDirector")
+  delD.style.cssText = 'visibility: hidden; display: none;';
+  let delW = document.getElementById("delWriter")
+  delW.style.cssText = 'visibility: hidden; display: none;';
+  let delB = document.getElementById('delButtom');
+  delB.style.cssText = 'visibility: hidden; display: none;';    
   let updateform = document.getElementById("bodyUpdate")
   updateform.style.cssText = 'visibility: visible; display: block;';
 }
 
 function delForm()
 {
-  document.getElementById("profesional").innerHTML = '';
-  let buscador = document.getElementById("buscador");
-  buscador.style.cssText = 'visibility: hidden;'; 
+  document.getElementById("movie").innerHTML = '';
+  let ocultar = document.getElementById("ocultar");
+  ocultar.style.cssText = 'visibility: hidden; display: none;'; 
+  let postForm = document.getElementById('bodyPost');
+  postForm.style.cssText = 'visibility: hidden; display: none;'; 
+  let updateform = document.getElementById("bodyUpdate")
+  updateform.style.cssText = 'visibility: hidden; display: none;';
+  let add = document.getElementById('postAdd');
+  add.style.cssText = 'visibility: hidden; display: none;';
+  let postD = document.getElementById("postDirector")
+  postD.style.cssText = 'visibility: hidden; display: none;';
+  let postW = document.getElementById("postWriter")
+  postW.style.cssText = 'visibility: hidden; display: none;';
+  let post = document.getElementById("postActor")
+  post.style.cssText = 'visibility: hidden; display: none;';
+  let delActor = document.getElementById("delActor")
+  delActor.style.cssText = 'visibility: hidden; display: none;';
+  let delD = document.getElementById("delDirector")
+  delD.style.cssText = 'visibility: hidden; display: none;';
+  let delW = document.getElementById("delWriter")
+  delW.style.cssText = 'visibility: hidden; display: none;'; 
+  let delform = document.getElementById("bodyDelete")
+  delform.style.cssText = 'visibility: visible; display: block;';
+  let delB = document.getElementById('delButtom');
+  delB.style.cssText = 'visibility: visible; display: block;'; 
+}
+
+function postActors()
+{
+  document.getElementById("movie").innerHTML = '';
+  let ocultar = document.getElementById("ocultar");
+  ocultar.style.cssText = 'visibility: hidden; display: none;'; 
   let postForm = document.getElementById('bodyPost');
   postForm.style.cssText = 'visibility: hidden; display: none;'; 
   let updateform = document.getElementById("bodyUpdate")
   updateform.style.cssText = 'visibility: hidden; display: none;';
   let delform = document.getElementById("bodyDelete")
-  delform.style.cssText = 'visibility: visible; display: block;'; 
+  delform.style.cssText = 'visibility: hidden; display: none;';
+  let delActor = document.getElementById("delActor")
+  delActor.style.cssText = 'visibility: hidden; display: none;';
+  let delD = document.getElementById("delDirector")
+  delD.style.cssText = 'visibility: hidden; display: none;';
+  let delW = document.getElementById("delWriter")
+  delW.style.cssText = 'visibility: hidden; display: none;';
+  let postD = document.getElementById("postDirector")
+  postD.style.cssText = 'visibility: hidden; display: none;';
+  let postW = document.getElementById("postWriter")
+  postW.style.cssText = 'visibility: hidden; display: none;';
+  let delB = document.getElementById('delButtom');
+  delB.style.cssText = 'visibility: hidden; display: none;'; 
+  let post = document.getElementById("postActor")
+  post.style.cssText = 'visibility: visible; display: block;';  
+}
+
+function postDirector()
+{
+  document.getElementById("movie").innerHTML = '';
+  let ocultar = document.getElementById("ocultar");
+  ocultar.style.cssText = 'visibility: hidden; display: none;'; 
+  let postForm = document.getElementById('bodyPost');
+  postForm.style.cssText = 'visibility: hidden; display: none;'; 
+  let updateform = document.getElementById("bodyUpdate")
+  updateform.style.cssText = 'visibility: hidden; display: none;';
+  let delform = document.getElementById("bodyDelete")
+  delform.style.cssText = 'visibility: hidden; display: none;';
+  let delActor = document.getElementById("delActor")
+  delActor.style.cssText = 'visibility: hidden; display: none;';
+  let delD = document.getElementById("delDirector")
+  delD.style.cssText = 'visibility: hidden; display: none;';
+  let delW = document.getElementById("delWriter")
+  delW.style.cssText = 'visibility: hidden; display: none;';
+  let postW = document.getElementById("postWriter")
+  postW.style.cssText = 'visibility: hidden; display: none;';
+  let post = document.getElementById("postActor")
+  post.style.cssText = 'visibility: hidden; display: none;';
+  let delB = document.getElementById('delButtom');
+  delB.style.cssText = 'visibility: hidden; display: none;'; 
+  let postD = document.getElementById("postDirector")
+  postD.style.cssText = 'visibility: visible; display: block;';
+}
+
+function postWriter()
+{
+  document.getElementById("movie").innerHTML = '';
+  let ocultar = document.getElementById("ocultar");
+  ocultar.style.cssText = 'visibility: hidden; display: none;'; 
+  let postForm = document.getElementById('bodyPost');
+  postForm.style.cssText = 'visibility: hidden; display: none;'; 
+  let updateform = document.getElementById("bodyUpdate")
+  updateform.style.cssText = 'visibility: hidden; display: none;';
+  let delform = document.getElementById("bodyDelete")
+  delform.style.cssText = 'visibility: hidden; display: none;';
+  let delActor = document.getElementById("delActor")
+  delActor.style.cssText = 'visibility: hidden; display: none;';
+  let delD = document.getElementById("delDirector")
+  delD.style.cssText = 'visibility: hidden; display: none;';
+  let delW = document.getElementById("delWriter")
+  delW.style.cssText = 'visibility: hidden; display: none;';
+  let post = document.getElementById("postActor")
+  post.style.cssText = 'visibility: hidden; display: none;';
+  let postD = document.getElementById("postDirector")
+  postD.style.cssText = 'visibility: hidden; display: none;';
+  let delB = document.getElementById('delButtom');
+  delB.style.cssText = 'visibility: hidden; display: none;'; 
+  let postW = document.getElementById("postWriter")
+  postW.style.cssText = 'visibility: visible; display: block;';
+}
+
+function delActors()
+{
+  document.getElementById("movie").innerHTML = '';
+  let ocultar = document.getElementById("ocultar");
+  ocultar.style.cssText = 'visibility: hidden; display: none;'; 
+  let postForm = document.getElementById('bodyPost');
+  postForm.style.cssText = 'visibility: hidden; display: none;'; 
+  let updateform = document.getElementById("bodyUpdate")
+  updateform.style.cssText = 'visibility: hidden; display: none;';
+  let delform = document.getElementById("bodyDelete")
+  delform.style.cssText = 'visibility: hidden; display: none;';
+  let delD = document.getElementById("delDirector")
+  delD.style.cssText = 'visibility: hidden; display: none;';
+  let delW = document.getElementById("delWriter")
+  delW.style.cssText = 'visibility: hidden; display: none;';
+  let postD = document.getElementById("postDirector")
+  postD.style.cssText = 'visibility: hidden; display: none;';
+  let postW = document.getElementById("postWriter")
+  postW.style.cssText = 'visibility: hidden; display: none;';
+  let post = document.getElementById("postActor")
+  post.style.cssText = 'visibility: hidden; display: none;';
+  let delActor = document.getElementById("delActor")
+  delActor.style.cssText = 'visibility: visible; display: block;';  
+}
+
+function delDirector()
+{
+  document.getElementById("movie").innerHTML = '';
+  let ocultar = document.getElementById("ocultar");
+  ocultar.style.cssText = 'visibility: hidden; display: none;'; 
+  let postForm = document.getElementById('bodyPost');
+  postForm.style.cssText = 'visibility: hidden; display: none;'; 
+  let updateform = document.getElementById("bodyUpdate")
+  updateform.style.cssText = 'visibility: hidden; display: none;';
+  let delform = document.getElementById("bodyDelete")
+  delform.style.cssText = 'visibility: hidden; display: none;';
+  let delD = document.getElementById("delDirector")
+  delD.style.cssText = 'visibility: hidden; display: none;';
+  let delW = document.getElementById("delWriter")
+  delW.style.cssText = 'visibility: hidden; display: none;';
+  let postW = document.getElementById("postWriter")
+  postW.style.cssText = 'visibility: hidden; display: none;';
+  let post = document.getElementById("postActor")
+  post.style.cssText = 'visibility: hidden; display: none;';
+  let delActor = document.getElementById("delActor")
+  delActor.style.cssText = 'visibility: hidden; display: none;';
+  let postD = document.getElementById("postDirector")
+  postD.style.cssText = 'visibility: visible; display: block;';  
+}
+
+function delWriter()
+{
+  document.getElementById("movie").innerHTML = '';
+  let ocultar = document.getElementById("ocultar");
+  ocultar.style.cssText = 'visibility: hidden; display: none;'; 
+  let postForm = document.getElementById('bodyPost');
+  postForm.style.cssText = 'visibility: hidden; display: none;'; 
+  let updateform = document.getElementById("bodyUpdate")
+  updateform.style.cssText = 'visibility: hidden; display: none;';
+  let delform = document.getElementById("bodyDelete")
+  delform.style.cssText = 'visibility: hidden; display: none;';
+  let delD = document.getElementById("delDirector")
+  delD.style.cssText = 'visibility: hidden; display: none;';
+  let postW = document.getElementById("postWriter")
+  postW.style.cssText = 'visibility: hidden; display: none;';
+  let post = document.getElementById("postActor")
+  post.style.cssText = 'visibility: hidden; display: none;';
+  let delActor = document.getElementById("delActor")
+  delActor.style.cssText = 'visibility: hidden; display: none;';
+  let postD = document.getElementById("postDirector")
+  postD.style.cssText = 'visibility: hidden; display: none;';
+  let delW = document.getElementById("delWriter")
+  delW.style.cssText = 'visibility: visible; display: block;';  
 }

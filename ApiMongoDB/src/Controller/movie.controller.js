@@ -8,7 +8,6 @@ const getMovie = async (req, res, next) =>{
         if(id == null)
         {
             const movie = await Movie.find()
-                console.log(movie)
                 res.send(movie);
         }
         else{
@@ -42,7 +41,8 @@ const getActors = async (req,res,next) =>
             {
                 temp += `\n${j}`    
             }
-            res.send(temp)
+            console.log(temp)
+            res.send(movie.actors)
         })
                                 
     }
@@ -72,7 +72,7 @@ const getDirectors = async (req,res,next) =>
             {
                 temp += `\n${j}`    
             }
-            res.send(temp)
+            res.send(movie.director)
         })
                                 
     }
@@ -101,7 +101,7 @@ const getWriter = async (req,res,next) =>
             {
                 temp += `\n${j}`    
             }
-            res.send(temp)
+            res.send(movie.writer)
         })
                                 
     }

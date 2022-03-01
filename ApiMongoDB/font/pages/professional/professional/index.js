@@ -44,7 +44,7 @@ class Professional{
         for(let prof of resul)
           {
             textTemp +=`<div class="col">
-                          <div class="card" style="width: 420px; margin: 15px;">
+                          <div class="card" style="width: 420px; margin: 5px; padding: 15px">
                               <img src="`+prof.image+`" style="border-radius: 15px;" class="card-img-top" alt="...">
                               <div class="card-body">
                                   <div class="card-header">
@@ -100,7 +100,7 @@ async function mostrarId()
         {
         console.log(resul);
             textTemp +=`<div class="col">
-                          <div class="card" style="width: 420px; margin: 15px;">
+                          <div class="card" style="width: 420px; margin: 5px; padding: 15px">
                               <img src="`+resul.image+`" style="border-radius: 15px;" class="card-img-top" alt="...">
                               <div class="card-body">
                                   <div class="card-header">
