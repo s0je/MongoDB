@@ -20,11 +20,11 @@ const getProfessional = async (req, res, next) =>{
 }
 
 const postProfessional = async (req, res, next) =>{
-    const {image, name, age, genre, weight, height, hairColor, race, isRetired, nationality, oscarNumber, profesion} =req.body
+    const {image, name, age, genre, weight, height, hairColor, race, isRetired, nationality, oscarsNumber, profesion} =req.body
     try{
-        const professional = new Professional ({image, name, age, genre, weight, height, hairColor, race, isRetired, nationality, oscarNumber, profesion});
+        const professional = new Professional ({image, name, age, genre, weight, height, hairColor, race, isRetired, nationality, oscarsNumber, profesion});
         const professionalSave = await professional.save();
-        res.send(201).json({message: professionalSave})
+        res.send(professionalSave)
     }
     catch (err)
     {
@@ -33,7 +33,7 @@ const postProfessional = async (req, res, next) =>{
 }
 
 const putProfessional = async (req, res, next) =>{
-    const {image, name, age, genre, weight, height, hairColor, race, isRetired, nationality, oscarNumber, profesion} =req.body;
+    const {image, name, age, genre, weight, height, hairColor, race, isRetired, nationality, oscarsNumber, profesion} =req.body;
     let id = req.query.id
     let objForUpdate = {};
     if(image!= '')
@@ -56,12 +56,13 @@ const putProfessional = async (req, res, next) =>{
         objForUpdate.isRetired = isRetired;
     if(nationality!='')
         objForUpdate.nationality = nationality;
-    if(oscarNumber!='')
-        objForUpdate.oscarNumber = oscarNumber;
+    if(oscarsNumber!='')
+        objForUpdate.oscarsNumber = oscarsNumber;
     if(profesion!='')
         objForUpdate.profesion = profesion;
 
     objForUpdate = {$set: objForUpdate};
+    console.log(objForUpdate)
     try
     {
         const professional = await Professional.updateOne({_id: id}, objForUpdate)
@@ -76,7 +77,7 @@ const putProfessional = async (req, res, next) =>{
 
 const delProfessional = async (req, res, next) =>
 {
-    let id =  req.query.id;
+    let id =  req.body.id;
     try
     {
         const professional = await Professional.deleteOne({_id: id})

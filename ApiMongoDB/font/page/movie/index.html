@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="./css/style.css" rel="stylesheet">
+    <title>Movie</title>
+</head>
+<body>
+    <header>
+        <img src="/font/img/Header.png" class="img-fluid" alt="Cabecera" width="100%" height="auto">
+    </header>
+    <nav class="navbar justify-content-center">
+        <ul class="nav justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link" href="/font/index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/font/pages/professional/professional/index.html">Profesionales</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="active" aria-current="page" href="./index.html">Peliculas</a>
+            </li>
+            </ul>
+    </nav>
+    <div class="botonera">
+      <button class="boton" style="font-weight: bold;" onclick="mostrarMovie()" type="button">Mostrar</button>
+      <button class="boton" style="font-weight: bold;" onclick="postForm()" type="button">Crear</button>
+      <button class="boton" style="font-weight: bold;" onclick="updateForm()" type="button">Actualizar</button>
+      <button class="boton" style="font-weight: bold;" onclick="delForm()" type="button">Eliminar</button>
+    </div>
+    <div id="ocultar" style="visibility: hidden; display: none;">
+      <div id="buscador" style="width: 100%; display: flex; justify-content: center;">
+        <div style="width: 40%; height: 50%; display: flex; flex-direction: row; align-content: center; align-items: center;">
+          <input id="indice" type="text" style="height: 50px;" class="form-control">
+          <button type="reset" class="boton" onclick="mostrarId()">Pelicula</button>
+        </div>
+        <div style="width: 40%; height: 50%; display: flex; flex-direction: row; align-content: center; align-items: center;">
+          <button type="reset" class="boton" onclick="mostrarActors()">Actores</button>
+          <button type="reset" class="boton" onclick="mostrarDirector()">Directores</button>
+          <button type="reset" class="boton" onclick="mostrarWriter()">Guionistas</button>
+        </div>
+      </div>
+    </div>
+    <div id="postAdd"  style="visibility: hidden; display: none;">
+      <div style="width: 100%; display: flex; justify-content: center;">
+        <div style="width: 40%; height: 50%; display: flex; flex-direction: row; align-content: center; align-items: center;">
+          <button type="reset" class="boton" onclick="postActors()">Actores</button>
+          <button type="reset" class="boton" onclick="postDirector()">Directores</button>
+          <button type="reset" class="boton" onclick="postWriter()">Guionistas</button>
+        </div>
+      </div>
+    </div>
+    <div id="delButtom"  style="visibility: hidden; display: none;">
+      <div style="width: 100%; display: flex; justify-content: center;">
+        <div style="width: 40%; height: 50%; display: flex; flex-direction: row; align-content: center; align-items: center;">
+          <button type="reset" class="boton" onclick="delActors()">Actores</button>
+          <button type="reset" class="boton" onclick="delDirector()">Directores</button>
+          <button type="reset" class="boton" onclick="delWriter()">Guionistas</button>
+        </div>
+      </div>
+    </div>
+    <div class="row" id="movie" style="display: flex; justify-content: center; align-content: center;">
+            
+		</div>
+    <div id="bodyPost" style="visibility: hidden; display: none;">
+    <div  class="bodyPost">
+        <div class="card">
+            <h4>Añadir Pelicula</h4>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label>Portada</label>
+                  <input id="portada" type="text">
+                </div>
+              </div>
+          
+              <div class="col">
+                <div class="form-group">
+                  <label>Title</label>
+                  <input id="title" type="text">
+                </div>
+              </div>
+          
+              <div class="col">
+                <div class="form-group">
+                  <label>Año</label>
+                  <input id="releaseYear" type="text">
+                </div>
+              </div>
+          
+              <div class="col">
+                <div class="form-group">
+                  <label>Actores</label>
+                  <input id="actors" type="text">
+                </div>
+              </div>
+          
+              <div class="col">
+                <div class="form-group">
+                  <label>Nacionalidad</label>
+                  <input id="nationality" type="text">
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="form-group">
+                  <label>Director</label>
+                  <input id="director" type="text">
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="form-group">
+                  <label>Guionistas</label>
+                  <input id="writer" type="text">
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="form-group">
+                  <label>Idioma</label>
+                  <input id="language" type="text">
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="form-group">
+                  <label>Plataforma</label>
+                  <input id="platform" type="text">
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="form-group">
+                  <label>Es UCM?</label>
+                  <input id="isMCU" type="text">
+                </div>
+              </div>
+          
+              <div class="col">
+                <div class="form-group">
+                  <label>Personaje Principal</label>
+                  <input id="mainCharacterName" type="text">
+                </div>
+              </div>
+
+              <div class="col">
+                <div class="form-group">
+                  <label>Productor</label>
+                  <input id="producer" type="text">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>Distribuidor</label>
+                  <input id="distributor" type="text">
+                </div>
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label>Genero</label>
+                  <input id="genre" type="text">
+                </div>
+              </div>
+
+              <div class="col">
+                <button class="boton" style="font-weight: bold;" onclick="postMovie()" type="button">Enviar</button>
+              </div>
+            </div>
+          </div>
+    </div>
+    </div>
+    <div id="bodyUpdate" style="visibility: hidden; display: none;">
+      <div  class="bodyPost">
+          <div class="card">
+              <h4>Actualizar Movie</h4>
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label>Id</label>
+                    <input id="idUpdate" type="text">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label>Portada</label>
+                    <input id="portadaUP" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Title</label>
+                    <input id="titleUP" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Año</label>
+                    <input id="releaseYearUP" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Actores</label>
+                    <input id="actorsUP" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Nacionalidad</label>
+                    <input id="nationalityUP" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Director</label>
+                    <input id="directorUP" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Guionistas</label>
+                    <input id="writerUP" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Idioma</label>
+                    <input id="languageUP" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Plataforma</label>
+                    <input id="platformUP" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Es UCM?</label>
+                    <input id="isMCUUP" type="text">
+                  </div>
+                </div>
+            
+                <div class="col">
+                  <div class="form-group">
+                    <label>Personaje Principal</label>
+                    <input id="mainCharacterNameUP" type="text">
+                  </div>
+                </div>
+  
+                <div class="col">
+                  <div class="form-group">
+                    <label>Productor</label>
+                    <input id="producerUP" type="text">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label>Distribuidor</label>
+                    <input id="distributorUP" type="text">
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label>Genero</label>
+                    <input id="genreUP" type="text">
+                  </div>
+                </div>
+                <div class="col">
+                  <button class="boton" style="font-weight: bold;" onclick="putMovie()" type="button">Enviar</button>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+    <div id="bodyDelete" style="visibility: hidden; display: none;">
+    <div  class="bodyPost">
+      <div class="card">
+            <h4>Eliminar Movie</h4>
+            <div class="row">
+              <div class="col">
+                <div class="form-group">
+                  <label>Id</label>
+                  <input id="idDel" type="text">
+                </div>
+              </div>
+              <div class="col">
+                <button class="boton" style="font-weight: bold;" onclick="delMovie()" type="button">Enviar</button>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div id="postActor"  style="visibility: hidden; display: none;">
+      <div  class="bodyPost">
+        <div class="card">
+          <h4>Agregar Actor</h4>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Id</label>
+                <input id="idPostActor" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Nombre del Actor</label>
+                <input id="actorPost" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <button class="boton" style="font-weight: bold;" onclick="addActor()" type="button">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="postDirector"  style="visibility: hidden; display: none;">
+      <div  class="bodyPost">
+        <div class="card">
+          <h4>Agregar Director</h4>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Id</label>
+                <input id="idPostDirector" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Director</label>
+                <input id="directorPost" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <button class="boton" style="font-weight: bold;" onclick="addDirector()" type="button">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="postWriter"  style="visibility: hidden; display: none;">
+      <div  class="bodyPost">
+        <div class="card">
+          <h4>Agregar Guionista</h4>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Id</label>
+                <input id="idPostWriter" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Guionista</label>
+                <input id="writerPost" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <button class="boton" style="font-weight: bold;" onclick="addWriter()" type="button">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="delActor"  style="visibility: hidden; display: none;">
+      <div  class="bodyPost">
+        <div class="card">
+          <h4>Eliminar Actor</h4>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Id</label>
+                <input id="idDelActor" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Nombre del Actor</label>
+                <input id="actorDel" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <button class="boton" style="font-weight: bold;" onclick="delActor()" type="button">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="delDirector"  style="visibility: hidden; display: none;">
+      <div  class="bodyPost">
+        <div class="card">
+          <h4>Eliminar Director</h4>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Id</label>
+                <input id="idDelDirector" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Director</label>
+                <input id="directorDel" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <button class="boton" style="font-weight: bold;" onclick="delDirector()" type="button">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="delWriter"  style="visibility: hidden; display: none;">
+      <div  class="bodyPost">
+        <div class="card">
+          <h4>Eliminar Guionista</h4>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Id</label>
+                <input id="idDelWriter" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Guionista</label>
+                <input id="writerDel" type="text">
+              </div>
+            </div>
+            <div class="col">
+              <button class="boton" style="font-weight: bold;" onclick="delWriter()" type="button">Enviar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="container-fluid text-left p-3" style="background-color: #c9d5d4">
+        <p class="small">&copy; Todos los derechos reservados</p>
+    </div>
+    <script type="text/javascript"  src="index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>    
+</body>
+</html>
